@@ -30,8 +30,8 @@ function App() {
 
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
-  const [guesses, setGuesses] = useState(3);
-  const [score, setScore] = useState(0);
+  const [guesses, setGuesses] = useState(guessesQty);
+  const [score, setScore] = useState(50);
 
   /*picket a random category*/
   const pickWordAndCategory = () => {
@@ -114,7 +114,9 @@ function App() {
   /* Restart the game */
   const retry = () => {
     setScore(0);
-    setGuesses(3);
+    setGuesses(guessesQty);
+
+    setGameStage(stages[0].name);
   };
   return (
     <div className="App">
@@ -131,7 +133,7 @@ function App() {
           score={score}
         />
       )}
-      {gameStage === "end" && <GameOver retry={retry} />}
+      {gameStage === "end" && <GameOver retry={retry} score={score} />}
     </div>
   );
 }
